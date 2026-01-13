@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthConnect | Northern Uganda Medical Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #0d47a1;
+            --secondary: #34a853;
+            --danger: #ea4335;
+            --warning: #fbbc05;
+            --light: #f8f9fa;
+            --dark: #202124;
+            --gray: #5f6368;
+            --light-gray: #dadce0;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #2d8c47;
+        }
+
+        /* Navigation */
+        header {
+            background: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .logo span {
+            color: var(--primary-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Hero Slider */
+        .hero {
+            margin-top: 80px;
+            background: linear-gradient(rgba(26, 115, 232, 0.9), rgba(13, 71, 161, 0.9)), url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--dark);
+            border-radius: 10px;
+        }
+
+        .slide h2 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .disease-title {
+            color: var(--secondary);
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .slide-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .symptoms, .causes, .prevention {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .symptoms h3, .causes h3, .prevention h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .symptoms ul, .causes ul, .prevention ul {
+            list-style-position: inside;
+            color: var(--gray);
+        }
+
+        .symptoms li, .causes li, .prevention li {
+            margin-bottom: 8px;
+        }
+
+        .slider-controls {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .slider-btn {
+            background: white;
+            color: var(--primary);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .slider-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: white;
+        }
+
+        /* Health Assessment Section */
+        .assessment {
+            background: white;
+            padding: 60px 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+        }
+
+        .assessment h2 {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 40px;
+        }
+
+        .question-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .question-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary);
+        }
+
+        .question-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+
+        .question-title i {
+            font-size: 24px;
+            margin-right: 15px;
+            color: var(--secondary);
+        }
+
+        .question-content {
+            display: none;
+        }
+
+        .question-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 15px;
+            background: white;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .checkbox-label:hover {
+            background: #f0f7ff;
+            border-color: var(--primary);
+        }
+
+        .checkbox-label input {
+            margin-right: 8px;
+        }
+
+        .step-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .results {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid var(--secondary);
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .results h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-img {
+            height: 200px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 60px;
+        }
+
+        .team-info {
+            padding: 25px;
+        }
+
+        .team-info h3 {
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .team-info .specialty {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .team-info .phone {
+            color: var(--gray);
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .team-info .phone i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        /* Testimonials */
+        .testimonial-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .testimonial-options .btn {
+            padding: 15px 30px;
+        }
+
+        .testimonial-form, .feedback-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-form textarea, .feedback-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* Study Section */
+        .disease-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .disease-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .disease-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .disease-header h3 {
+            font-size: 24px;
+        }
+
+        .disease-content {
+            padding: 25px;
+        }
+
+        .disease-content h4 {
+            color: var(--primary);
+            margin: 15px 0 10px;
+        }
+
+        .disease-content ul {
+            padding-left: 20px;
+            color: var(--gray);
+        }
+
+        .disease-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #b0b7c3;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #b0b7c3;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .slide {
+                padding: 30px 20px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slider-controls {
+                flex-wrap: wrap;
+            }
+
+            .testimonial-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .question-box {
+                padding: 20px;
+            }
+
+            .step-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .step-controls .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .slide-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .disease-title {
+                font-size: 24px;
+            }
+
+            .testimonial-form, .feedback-form {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-hospital-alt"></i>
+                    HealthConnect<span>Uganda</span>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#test">Test</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#study">Study</a></li>
+<li><a href="index.html">Doctor</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Slider Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Medical Care for Northern Uganda</h1>
+            <p>Accessible healthcare information and services for our community</p>
+            
+            <div class="slider-container">
+                <div class="slider" id="diseaseSlider">
+                    <!-- Slide 1: Malaria -->
+                    <div class="slide">
+                        <h2>Disease Awareness</h2>
+                        <div class="disease-title">Malaria</div>
+                        <div class="slide-content">
+                            <div class="symptoms">
+                                <h3>Symptoms</h3>
+                                <ul>
+                                    <li>Fever and chills</li>
+                                    <li>Headache and muscle aches</li>
+                                    <li>Fatigue and weakness</li>
+                                    <li>Nausea and vomiting</li>
+                                    <li>Sweating and shaking</li>
+                                </ul>
+                            </div>
+                            <div class="causes">
+                                <h3>Causes</h3>
+                                <ul>
+                                    <li>Bite from infected Anopheles mosquito</li>
+                                    <li>Transmission through blood (rare)</li>
+                                    <li>Mother to unborn child (congenital)</li>
+                                </ul>
+                            </div>
+                            <div class="prevention">
+                                <h3>Prevention</h3>
+                                <ul>
+                                    <li>Use insecticide-treated mosquito nets</li>
+                                    <li>Apply mosquito repellent on skin</li>
+                                    <li>Eliminate standing water around homes</li>
+                                    <li>Take antimalarial drugs when traveling to high-risk areas</li>
+                                    <li>Wear long-sleeved clothing in evenings</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2: Hypertension -->
+                    <div class="slide">
+                        <h2>Disease Awareness</h2>
+                        <div class="disease-title">Hypertension (High Blood Pressure)</div>
+                        <div class="slide-content">
+                            <div class="symptoms">
+                                <h3>Symptoms</h3>
+                                <ul>
+                                    <li>Often no symptoms (silent killer)</li>
+                                    <li>Headaches, especially in the morning</li>
+                                    <li>Shortness of breath</li>
+                                    <li>Dizziness or lightheadedness</li>
+                                    <li>Chest pain and fatigue</li>
+                                </ul>
+                            </div>
+                            <div class="causes">
+                                <h3>Causes</h3>
+                                <ul>
+                                    <li>High salt intake in diet</li>
+                                    <li>Lack of physical activity</li>
+                                    <li>Obesity and overweight</li>
+                                    <li>Smoking and excessive alcohol</li>
+                                    <li>Stress and genetic factors</li>
+                                </ul>
+                            </div>
+                            <div class="prevention">
+                                <h3>Prevention</h3>
+                                <ul>
+                                    <li>Reduce salt and processed food consumption</li>
+                                    <li>Exercise regularly (30 minutes daily)</li>
+                                    <li>Maintain healthy weight</li>
+                                    <li>Limit alcohol and avoid smoking</li>
+                                    <li>Manage stress through relaxation techniques</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3: Typhoid -->
+                    <div class="slide">
+                        <h2>Disease Awareness</h2>
+                        <div class="disease-title">Typhoid Fever</div>
+                        <div class="slide-content">
+                            <div class="symptoms">
+                                <h3>Symptoms</h3>
+                                <ul>
+                                    <li>High fever that increases gradually</li>
+                                    <li>Headache and body weakness</li>
+                                    <li>Stomach pain and constipation or diarrhea</li>
+                                    <li>Loss of appetite and weight loss</li>
+                                    <li>Rose-colored spots on chest</li>
+                                </ul>
+                            </div>
+                            <div class="causes">
+                                <h3>Causes</h3>
+                                <ul>
+                                    <li>Salmonella Typhi bacteria</li>
+                                    <li>Contaminated food or water</li>
+                                    <li>Poor sanitation and hygiene</li>
+                                    <li>Contact with infected person</li>
+                                </ul>
+                            </div>
+                            <div class="prevention">
+                                <h3>Prevention</h3>
+                                <ul>
+                                    <li>Drink safe, boiled or treated water</li>
+                                    <li>Practice proper handwashing with soap</li>
+                                    <li>Avoid raw fruits and vegetables that can't be peeled</li>
+                                    <li>Get vaccinated if in high-risk areas</li>
+                                    <li>Ensure proper food handling and cooking</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-controls">
+                    <button class="slider-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                
+                <div class="slider-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Assessment Section -->
+    <section class="container">
+        <div class="assessment">
+            <h2>Health Assessment Tool</h2>
+            <p class="text-center" style="color: var(--gray); margin-bottom: 40px;">Answer a few questions to get personalized health advice</p>
+            
+            <div class="question-container">
+                <!-- Question 1: How are you feeling today? -->
+                <div class="question-box">
+                    <div class="question-title" id="q1Title">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>How are you feeling today?</h3>
+                    </div>
+                    <div class="question-content active" id="q1Content">
+                        <p>Tell us about your symptoms to get advice on what test you might need</p>
+                        
+                        <form id="symptomsForm">
+                            <div class="form-group">
+                                <label for="region">Region</label>
+                                <select class="form-control" id="region" required>
+                                    <option value="">Select your region</option>
+                                    <option value="acholi">Acholi (Gulu, Kitgum, Pader)</option>
+                                    <option value="lango">Lango (Lira, Alebtong, Otuke)</option>
+                                    <option value="west_nile">West Nile (Arua, Nebbi, Moyo)</option>
+                                    <option value="karamoja">Karamoja (Moroto, Kotido, Kaabong)</option>
+                                    <option value="teso">Teso (Soroti, Katakwi, Kumi)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="month">Month</label>
+                                <select class="form-control" id="month" required>
+                                    <option value="">Select current month</option>
+                                    <option value="jan">January</option>
+                                    <option value="feb">February</option>
+                                    <option value="mar">March</option>
+                                    <option value="apr">April</option>
+                                    <option value="may">May</option>
+                                    <option value="jun">June</option>
+                                    <option value="jul">July</option>
+                                    <option value="aug">August</option>
+                                    <option value="sep">September</option>
+                                    <option value="oct">October</option>
+                                    <option value="nov">November</option>
+                                    <option value="dec">December</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="reason">Reason for Visit (Primary Symptom)</label>
+                                <select class="form-control" id="reason" required>
+                                    <option value="">Select your main symptom</option>
+                                    <option value="fever">Fever</option>
+                                    <option value="headache">Headache</option>
+                                    <option value="diarrhoea">Diarrhoea</option>
+                                    <option value="stomach_pain">Stomach Pain</option>
+                                    <option value="chest_pain">Chest Pain</option>
+                                    <option value="dizziness">Dizziness</option>
+                                    <option value="shortness_breath">Shortness of Breath</option>
+                                    <option value="abnormal_heart">Abnormal Heart Rhythm</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Other Symptoms You're Experiencing</label>
+                                <div class="checkbox-group" id="otherSymptoms">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="symptom" value="dizziness"> Dizziness
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="symptom" value="fever"> Fever
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="symptom" value="loss_appetite"> Loss of Appetite
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="symptom" value="loss_smell"> Loss of Smell
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="symptom" value="vomiting"> Vomiting
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="symptom" value="runny_nose"> Runny Nose
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="symptom" value="cough"> Cough
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="symptom" value="fatigue"> Fatigue
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="step-controls">
+                                <button type="button" class="btn" id="nextToStep2">Next Step <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Question 2: Additional symptoms -->
+                <div class="question-box">
+                    <div class="question-title" id="q2Title">
+                        <i class="fas fa-stethoscope"></i>
+                        <h3>Additional Health Information</h3>
+                    </div>
+                    <div class="question-content" id="q2Content">
+                        <p>Please provide more details about your symptoms</p>
+                        
+                        <form id="additionalSymptomsForm">
+                            <div class="form-group">
+                                <label>Select all that apply to you:</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additional_symptom" value="3_days"> Have you experienced this for 3 days or more?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additional_symptom" value="morning_headache"> Experiencing periodic morning or evening headache?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additional_symptom" value="shivering"> Are you shaking or shivering?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additional_symptom" value="dizziness2"> Experiencing dizziness?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additional_symptom" value="constant_headache"> Do you have constant headache?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additional_symptom" value="abdominal_pain"> Are you having abdominal pain?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additional_symptom" value="passing_stool"> Are you passing out stool frequently?
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="step-controls">
+                                <button type="button" class="btn" id="prevToStep1"><i class="fas fa-arrow-left"></i> Previous</button>
+                                <button type="button" class="btn" id="nextToStep3">Next Step <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Question 3: Exposure risk -->
+                <div class="question-box">
+                    <div class="question-title" id="q3Title">
+                        <i class="fas fa-history"></i>
+                        <h3>Exposure & History</h3>
+                    </div>
+                    <div class="question-content" id="q3Content">
+                        <p>Help us understand your risk factors</p>
+                        
+                        <form id="exposureForm">
+                            <div class="form-group">
+                                <label>Select all that apply:</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="exposure" value="travel_malaria"> Have you traveled to any place with malaria cases recently?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="exposure" value="contact_malaria"> Have you been in contact with anyone having malaria?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="exposure" value="frequent_malaria"> Do you have frequent malaria occurrence?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="exposure" value="contact_typhoid"> Have you been in contact with someone having typhoid fever?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="exposure" value="mosquito_net"> Have you been sleeping under mosquito net?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="exposure" value="contaminated_water"> Have you drunk untreated water recently?
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="exposure" value="hypertension_family"> Does your family have history of hypertension?
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="step-controls">
+                                <button type="button" class="btn" id="prevToStep2"><i class="fas fa-arrow-left"></i> Previous</button>
+                                <button type="button" class="btn" id="analyzeSymptoms">Analyze My Symptoms <i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                        
+                        <!-- Results will appear here -->
+                        <div class="results" id="testResults">
+                            <h4>Recommended Test Based on Your Symptoms</h4>
+                            <p id="recommendedTest">Based on your symptoms, we recommend: <strong>Malaria Test (Blood Film)</strong></p>
+                            <p id="additionalAdvice">Please visit the nearest health facility for proper diagnosis and treatment. Based on your region and month, malaria is currently prevalent in your area.</p>
+                            <button class="btn btn-secondary" id="resetAssessment">Start New Assessment</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 4: Test Status -->
+                <div class="question-box">
+                    <div class="question-title" id="q4Title">
+                        <i class="fas fa-vial"></i>
+                        <h3>Do you want to know your status?</h3>
+                    </div>
+                    <div class="question-content" id="q4Content">
+                        <p>Enter your test result to get interpretation</p>
+                        
+                        <form id="testResultForm">
+                            <div class="form-group">
+                                <label for="testType">Test Type</label>
+                                <select class="form-control" id="testType" required>
+                                    <option value="">Select test type</option>
+                                    <option value="malaria">Malaria Test</option>
+                                    <option value="typhoid">Typhoid Test</option>
+                                    <option value="hypertension">Blood Pressure</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="testResult">Test Result</label>
+                                <select class="form-control" id="testResult" required>
+                                    <option value="">Select result</option>
+                                    <option value="positive">Positive (+)</option>
+                                    <option value="double_positive">Strong Positive (++)</option>
+                                    <option value="triple_positive">Very Strong Positive (+++)</option>
+                                    <option value="negative">Negative (-)</option>
+                                    <option value="borderline">Borderline</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="submit" class="btn">Interpret Result <i class="fas fa-file-medical-alt"></i></button>
+                            </div>
+                        </form>
+                        
+                        <div class="results" id="resultInterpretation">
+                            <h4>Test Result Interpretation</h4>
+                            <p id="interpretationText">Your result will appear here after submission</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 5: Medication Reminder -->
+                <div class="question-box">
+                    <div class="question-title" id="q5Title">
+                        <i class="fas fa-pills"></i>
+                        <h3>Are you on medication?</h3>
+                    </div>
+                    <div class="question-content" id="q5Content">
+                        <p>Set reminders for your treatment schedule</p>
+                        
+                        <form id="medicationForm">
+                            <div class="form-group">
+                                <label for="medicationName">Medication Name</label>
+                                <input type="text" class="form-control" id="medicationName" placeholder="e.g., Coartem, Amoxicillin">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dosage">Dosage</label>
+                                <input type="text" class="form-control" id="dosage" placeholder="e.g., 2 tablets daily">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="reminderTime">Reminder Time</label>
+                                <input type="time" class="form-control" id="reminderTime" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="duration">Duration (days)</label>
+                                <input type="number" class="form-control" id="duration" min="1" max="90" value="7">
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-secondary">Set Reminder <i class="fas fa-bell"></i></button>
+                            </div>
+                        </form>
+                        
+                        <div class="results" id="reminderSet">
+                            <h4>Reminder Set Successfully</h4>
+                            <p id="reminderDetails">Your medication reminder will appear here after setup</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+        <div class="container">
+            <h2 class="section-title">Our Medical Team</h2>
+            <p class="text-center" style="color: var(--gray); max-width: 800px; margin: 0 auto 40px;">Meet our dedicated healthcare professionals serving Northern Uganda</p>
+            
+            <div class="team-grid">
+                <!-- Team Member 1 -->
+                <div class="team-card">
+                    <div class="team-img">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3>Dr. Okello James</h3>
+                        <span class="specialty">General Physician & Malaria Specialist</span>
+                        <p>With over 15 years of experience treating infectious diseases in Northern Uganda.</p>
+                        <div class="phone">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+256 772 123 456</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-card">
+                    <div class="team-img">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3>Dr. Aceng Mary</h3>
+                        <span class="specialty">Pediatrician & Vaccination Expert</span>
+                        <p>Specializes in child healthcare and immunization programs across Acholi region.</p>
+                        <div class="phone">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+256 752 234 567</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="team-card">
+                    <div class="team-img">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3>Dr. Odongo Michael</h3>
+                        <span class="specialty">Cardiologist & Hypertension Specialist</span>
+                        <p>Focuses on cardiovascular health and managing hypertension in the community.</p>
+                        <div class="phone">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+256 782 345 678</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 4 -->
+                <div class="team-card">
+                    <div class="team-img">
+                        <i class="fas fa-user-nurse"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3>Nurse Atoo Grace</h3>
+                        <span class="specialty">Community Health Nurse</span>
+                        <p>Provides mobile clinic services and health education in remote villages.</p>
+                        <div class="phone">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+256 712 456 789</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Patient Testimonials & Feedback</h2>
+            
+            <div class="testimonial-options">
+                <button class="btn" id="viewTestimonialsBtn">View Testimonials</button>
+                <button class="btn btn-secondary" id="addTestimonialBtn">Add Testimony</button>
+                <button class="btn" id="giveFeedbackBtn">Give Feedback</button>
+            </div>
+            
+            <!-- View Testimonials -->
+            <div class="testimonial-grid" id="testimonialsView">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The malaria test recommendation saved my life. I followed the advice and got treatment just in time."</p>
+                    <p class="testimonial-author">- Ocen Peter, Gulu</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Dr. Okello's team helped manage my hypertension. I'm now living a healthier life with proper medication."</p>
+                    <p class="testimonial-author">- Adong Sarah, Lira</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The health information on this platform educated our entire village about typhoid prevention."</p>
+                    <p class="testimonial-author">- Village Health Team, Kitgum</p>
+                </div>
+            </div>
+            
+            <!-- Add Testimonial Form -->
+            <div class="testimonial-form" id="addTestimonialForm" style="display: none;">
+                <h3 class="text-center" style="margin-bottom: 30px; color: var(--primary-dark);">Share Your Experience</h3>
+                <form id="testimonialForm">
+                    <div class="form-group">
+                        <label for="testimonialName">Your Name</label>
+                        <input type="text" class="form-control" id="testimonialName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="testimonialLocation">Location</label>
+                        <input type="text" class="form-control" id="testimonialLocation" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="testimonialText">Your Testimony</label>
+                        <textarea class="form-control" id="testimonialText" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-secondary">Submit Testimony</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Give Feedback Form -->
+            <div class="feedback-form" id="feedbackForm" style="display: none;">
+                <h3 class="text-center" style="margin-bottom: 30px; color: var(--primary-dark);">Give Us Feedback</h3>
+                <form id="feedbackFormInput">
+                    <div class="form-group">
+                        <label for="feedbackCategory">Feedback Category</label>
+                        <select class="form-control" id="feedbackCategory" required>
+                            <option value="">Select category</option>
+                            <option value="service">Service Quality</option>
+                            <option value="website">Website Experience</option>
+                            <option value="information">Health Information</option>
+                            <option value="suggestion">Suggestion</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackText">Your Feedback</label>
+                        <textarea class="form-control" id="feedbackText" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackEmail">Email (Optional)</label>
+                        <input type="email" class="form-control" id="feedbackEmail">
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn">Submit Feedback</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Section -->
+    <section id="study">
+        <div class="container">
+            <h2 class="section-title">Health Studies: Diseases in Northern Uganda</h2>
+            <p class="text-center" style="color: var(--gray); max-width: 800px; margin: 0 auto 40px;">Learn about common diseases in our region, their symptoms and prevention</p>
+            
+            <div class="disease-cards">
+                <!-- Malaria Card -->
+                <div class="disease-card">
+                    <div class="disease-header">
+                        <h3>Malaria</h3>
+                    </div>
+                    <div class="disease-content">
+                        <p><strong>Prevalence:</strong> Highly endemic in Northern Uganda, especially during rainy seasons (March-June, September-November).</p>
+                        
+                        <h4>Key Symptoms</h4>
+                        <ul>
+                            <li>High fever with chills and sweating</li>
+                            <li>Headache and body aches</li>
+                            <li>Nausea and vomiting</li>
+                            <li>Fatigue and weakness</li>
+                            <li>In severe cases: confusion, seizures, anemia</li>
+                        </ul>
+                        
+                        <h4>Prevention Strategies</h4>
+                        <ul>
+                            <li>Sleep under insecticide-treated mosquito nets (ITNs)</li>
+                            <li>Use mosquito repellents and wear protective clothing</li>
+                            <li>Clear stagnant water around homes</li>
+                            <li>Take preventive medication if pregnant or traveling to high-risk areas</li>
+                            <li>Seek prompt diagnosis and treatment</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Typhoid Card -->
+                <div class="disease-card">
+                    <div class="disease-header">
+                        <h3>Typhoid Fever</h3>
+                    </div>
+                    <div class="disease-content">
+                        <p><strong>Prevalence:</strong> Common in areas with poor sanitation and contaminated water sources.</p>
+                        
+                        <h4>Key Symptoms</h4>
+                        <ul>
+                            <li>Prolonged high fever</li>
+                            <li>Stomach pain and discomfort</li>
+                            <li>Headache and weakness</li>
+                            <li>Loss of appetite and weight loss</li>
+                            <li>Rose-colored spots on chest and abdomen</li>
+                        </ul>
+                        
+                        <h4>Prevention Strategies</h4>
+                        <ul>
+                            <li>Drink boiled or treated water</li>
+                            <li>Practice proper handwashing with soap</li>
+                            <li>Ensure proper food handling and cooking</li>
+                            <li>Get vaccinated if in high-risk areas</li>
+                            <li>Improve sanitation facilities</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Hypertension Card -->
+                <div class="disease-card">
+                    <div class="disease-header">
+                        <h3>Hypertension</h3>
+                    </div>
+                    <div class="disease-content">
+                        <p><strong>Prevalence:</strong> Increasing in urban areas due to lifestyle changes and high salt intake.</p>
+                        
+                        <h4>Key Symptoms</h4>
+                        <ul>
+                            <li>Often asymptomatic (silent condition)</li>
+                            <li>Headaches, especially in the morning</li>
+                            <li>Shortness of breath</li>
+                            <li>Dizziness or lightheadedness</li>
+                            <li>Chest pain and vision problems in severe cases</li>
+                        </ul>
+                        
+                        <h4>Prevention Strategies</h4>
+                        <ul>
+                            <li>Reduce salt intake in cooking and processed foods</li>
+                            <li>Engage in regular physical activity (30 minutes daily)</li>
+                            <li>Maintain healthy weight</li>
+                            <li>Limit alcohol and avoid smoking</li>
+                            <li>Regular blood pressure check-ups</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Additional Diseases -->
+                <div class="disease-card">
+                    <div class="disease-header">
+                        <h3>Other Common Diseases</h3>
+                    </div>
+                    <div class="disease-content">
+                        <h4>Respiratory Infections</h4>
+                        <ul>
+                            <li><strong>Pneumonia:</strong> Common in children and elderly, especially during cold seasons</li>
+                            <li><strong>Tuberculosis:</strong> Still prevalent in crowded settings</li>
+                        </ul>
+                        
+                        <h4>Waterborne Diseases</h4>
+                        <ul>
+                            <li><strong>Cholera:</strong> Occurs during floods and in areas with poor sanitation</li>
+                            <li><strong>Dysentery:</strong> Common in children, causes severe diarrhea</li>
+                        </ul>
+                        
+                        <h4>Prevention for All Diseases</h4>
+                        <ul>
+                            <li>Improve personal and environmental hygiene</li>
+                            <li>Access to clean water and proper sanitation</li>
+                            <li>Vaccination according to national schedule</li>
+                            <li>Early diagnosis and treatment</li>
+                            <li>Community health education</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HealthConnect Uganda</h3>
+                    <p>Providing accessible healthcare information and services to communities in Northern Uganda since 2015.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Gulu City, Northern Uganda</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#test">Health Assessment</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#study">Disease Information</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone-alt"></i> +256 414 123 456</li>
+                        <li><i class="fas fa-envelope"></i> info@healthconnect.ug</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</li>
+                        <li><i class="fas fa-hospital"></i> Emergency: 24/7</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Emergency Numbers</h3>
+                    <ul class="footer-links">
+                        <li>Ambulance: 911</li>
+                        <li>Ministry of Health: 0800 100 066</li>
+                        <li>Red Cross: 0792 999 999</li>
+                        <li>Police: 999</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 HealthConnect Uganda. All rights reserved. | This is a demonstration website for healthcare information.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+        
+        // Disease Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+        
+        function showSlide(n) {
+            // Reset to first slide if at the end
+            if (n >= totalSlides) currentSlide = 0;
+            else if (n < 0) currentSlide = totalSlides - 1;
+            else currentSlide = n;
+            
+            // Move the slider
+            const slider = document.getElementById('diseaseSlider');
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update active dot
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        // Next/previous controls
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+        
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+        
+        // Dot controls
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+        
+        // Auto-advance slides every 10 seconds
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 10000);
+        
+        // Health Assessment Navigation
+        document.getElementById('nextToStep2').addEventListener('click', function() {
+            document.getElementById('q1Content').classList.remove('active');
+            document.getElementById('q2Content').classList.add('active');
+            
+            // Highlight current step
+            document.getElementById('q1Title').style.opacity = '0.7';
+            document.getElementById('q2Title').style.opacity = '1';
+        });
+        
+        document.getElementById('prevToStep1').addEventListener('click', function() {
+            document.getElementById('q2Content').classList.remove('active');
+            document.getElementById('q1Content').classList.add('active');
+            
+            // Highlight current step
+            document.getElementById('q2Title').style.opacity = '0.7';
+            document.getElementById('q1Title').style.opacity = '1';
+        });
+        
+        document.getElementById('nextToStep3').addEventListener('click', function() {
+            document.getElementById('q2Content').classList.remove('active');
+            document.getElementById('q3Content').classList.add('active');
+            
+            // Highlight current step
+            document.getElementById('q2Title').style.opacity = '0.7';
+            document.getElementById('q3Title').style.opacity = '1';
+        });
+        
+        document.getElementById('prevToStep2').addEventListener('click', function() {
+            document.getElementById('q3Content').classList.remove('active');
+            document.getElementById('q2Content').classList.add('active');
+            
+            // Highlight current step
+            document.getElementById('q3Title').style.opacity = '0.7';
+            document.getElementById('q2Title').style.opacity = '1';
+        });
+        
+        // Analyze Symptoms
+        document.getElementById('analyzeSymptoms').addEventListener('click', function() {
+            const region = document.getElementById('region').value;
+            const month = document.getElementById('month').value;
+            const reason = document.getElementById('reason').value;
+            
+            // Get checked symptoms
+            const symptoms = Array.from(document.querySelectorAll('input[name="symptom"]:checked')).map(cb => cb.value);
+            const additionalSymptoms = Array.from(document.querySelectorAll('input[name="additional_symptom"]:checked')).map(cb => cb.value);
+            const exposures = Array.from(document.querySelectorAll('input[name="exposure"]:checked')).map(cb => cb.value);
+            
+            // Simple logic to determine recommended test
+            let recommendedTest = "General Health Check-up";
+            let additionalAdvice = "Please visit the nearest health facility for proper diagnosis.";
+            
+            // Check for malaria indicators
+            const malariaIndicators = ['fever', 'shivering', 'travel_malaria', 'contact_malaria'];
+            const hasMalariaIndicators = symptoms.includes('fever') || 
+                                        additionalSymptoms.includes('shivering') || 
+                                        exposures.some(exposure => malariaIndicators.includes(exposure));
+            
+            // Check for typhoid indicators
+            const typhoidIndicators = ['fever', 'stomach_pain', 'abdominal_pain', 'passing_stool', 'contaminated_water'];
+            const hasTyphoidIndicators = reason === 'stomach_pain' || 
+                                         symptoms.includes('loss_appetite') || 
+                                         additionalSymptoms.includes('abdominal_pain') ||
+                                         additionalSymptoms.includes('passing_stool') ||
+                                         exposures.includes('contaminated_water');
+            
+            // Check for hypertension indicators
+            const hypertensionIndicators = ['headache', 'dizziness', 'chest_pain', 'shortness_breath', 'hypertension_family'];
+            const hasHypertensionIndicators = reason === 'headache' || 
+                                              reason === 'dizziness' || 
+                                              reason === 'chest_pain' ||
+                                              reason === 'shortness_breath' ||
+                                              exposures.includes('hypertension_family');
+            
+            // Determine test based on symptoms
+            if (hasMalariaIndicators && region && (month === 'apr' || month === 'may' || month === 'jun' || month === 'oct' || month === 'nov')) {
+                recommendedTest = "Malaria Test (Blood Film)";
+                additionalAdvice = "Based on your symptoms and the current rainy season in your region, malaria is highly likely. Please visit a health facility for a blood test and treatment if confirmed.";
+            } else if (hasTyphoidIndicators) {
+                recommendedTest = "Typhoid Test (Blood Culture or Widal Test)";
+                additionalAdvice = "Your symptoms suggest possible typhoid fever. A blood test is needed for confirmation. Ensure you drink only boiled or treated water while awaiting diagnosis.";
+            } else if (hasHypertensionIndicators) {
+                recommendedTest = "Blood Pressure Check and Cardiovascular Assessment";
+                additionalAdvice = "Your symptoms may indicate hypertension or other cardiovascular issues. Please have your blood pressure checked regularly and consult a healthcare provider.";
+            } else if (symptoms.length > 0 || additionalSymptoms.length > 0) {
+                recommendedTest = "Complete Blood Count (CBC) and General Physical Examination";
+                additionalAdvice = "Based on your symptoms, a general health check-up is recommended to determine the cause of your discomfort.";
+            }
+            
+            // Display results
+            document.getElementById('recommendedTest').innerHTML = `Based on your symptoms, we recommend: <strong>${recommendedTest}</strong>`;
+            document.getElementById('additionalAdvice').textContent = additionalAdvice;
+            document.getElementById('testResults').classList.add('active');
+            
+            // Scroll to results
+            document.getElementById('testResults').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+        
+        // Reset assessment
+        document.getElementById('resetAssessment').addEventListener('click', function() {
+            // Reset forms
+            document.getElementById('symptomsForm').reset();
+            document.getElementById('additionalSymptomsForm').reset();
+            document.getElementById('exposureForm').reset();
+            
+            // Reset UI
+            document.getElementById('q1Content').classList.add('active');
+            document.getElementById('q2Content').classList.remove('active');
+            document.getElementById('q3Content').classList.remove('active');
+            document.getElementById('testResults').classList.remove('active');
+            
+            // Reset highlights
+            document.getElementById('q1Title').style.opacity = '1';
+            document.getElementById('q2Title').style.opacity = '0.7';
+            document.getElementById('q3Title').style.opacity = '0.7';
+            
+            // Scroll to top of assessment
+            document.getElementById('q1Title').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Test result interpretation
+        document.getElementById('testResultForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const testType = document.getElementById('testType').value;
+            const testResult = document.getElementById('testResult').value;
+            
+            let interpretation = "";
+            
+            if (testType === 'malaria') {
+                if (testResult === 'positive' || testResult === 'double_positive' || testResult === 'triple_positive') {
+                    interpretation = "Your malaria test is POSITIVE. Please consult a healthcare provider immediately for antimalarial treatment. Complete the full course of medication even if you feel better. Ensure you sleep under a mosquito net to prevent reinfection.";
+                } else if (testResult === 'negative') {
+                    interpretation = "Your malaria test is NEGATIVE. However, if symptoms persist, consider retesting in 24-48 hours or testing for other illnesses like typhoid. Continue using mosquito nets for prevention.";
+                } else {
+                    interpretation = "Your test result is BORDERLINE. This may indicate early infection or low parasite count. Please consult a healthcare provider for further evaluation and possible retesting.";
+                }
+            } else if (testType === 'typhoid') {
+                if (testResult === 'positive' || testResult === 'double_positive' || testResult === 'triple_positive') {
+                    interpretation = "Your typhoid test is POSITIVE. You need antibiotic treatment prescribed by a healthcare provider. Complete the full course of antibiotics. Drink plenty of clean, boiled water and maintain good hygiene to prevent spreading.";
+                } else if (testResult === 'negative') {
+                    interpretation = "Your typhoid test is NEGATIVE. If symptoms persist, consider other causes like malaria or urinary tract infections. Ensure you drink only treated water and practice good hand hygiene.";
+                } else {
+                    interpretation = "Your test result is BORDERLINE. This could indicate early infection or recent vaccination. Clinical evaluation and possibly retesting are recommended.";
+                }
+            } else if (testType === 'hypertension') {
+                if (testResult === 'positive') {
+                    interpretation = "Your blood pressure reading is HIGH (Hypertension). Please consult a healthcare provider for proper management. Lifestyle changes like reducing salt intake, regular exercise, and stress management are important. Take prescribed medication regularly.";
+                } else if (testResult === 'negative') {
+                    interpretation = "Your blood pressure reading is NORMAL. Continue maintaining a healthy lifestyle with regular exercise, balanced diet, and limited salt intake. Check your blood pressure at least once a year.";
+                } else {
+                    interpretation = "Your blood pressure reading is BORDERLINE/ ELEVATED. This is a warning sign. Implement lifestyle changes immediately and monitor your blood pressure regularly. Consult a healthcare provider for guidance.";
+                }
+            }
+            
+            document.getElementById('interpretationText').textContent = interpretation;
+            document.getElementById('resultInterpretation').classList.add('active');
+        });
+        
+        // Medication reminder
+        document.getElementById('medicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const medicationName = document.getElementById('medicationName').value;
+            const dosage = document.getElementById('dosage').value;
+            const reminderTime = document.getElementById('reminderTime').value;
+            const duration = document.getElementById('duration').value;
+            
+            const reminderDetails = `Reminder set for <strong>${medicationName}</strong> (${dosage}) at <strong>${reminderTime}</strong> daily for <strong>${duration} days</strong>. You'll receive a notification at the specified time.`;
+            
+            document.getElementById('reminderDetails').innerHTML = reminderDetails;
+            document.getElementById('reminderSet').classList.add('active');
+            
+            // Show confirmation alert
+            alert(`Medication reminder set successfully! You'll be reminded to take ${medicationName} at ${reminderTime} daily for ${duration} days.`);
+        });
+        
+        // Testimonials section navigation
+        document.getElementById('viewTestimonialsBtn').addEventListener('click', function() {
+            document.getElementById('testimonialsView').style.display = 'grid';
+            document.getElementById('addTestimonialForm').style.display = 'none';
+            document.getElementById('feedbackForm').style.display = 'none';
+        });
+        
+        document.getElementById('addTestimonialBtn').addEventListener('click', function() {
+            document.getElementById('testimonialsView').style.display = 'none';
+            document.getElementById('addTestimonialForm').style.display = 'block';
+            document.getElementById('feedbackForm').style.display = 'none';
+        });
+        
+        document.getElementById('giveFeedbackBtn').addEventListener('click', function() {
+            document.getElementById('testimonialsView').style.display = 'none';
+            document.getElementById('addTestimonialForm').style.display = 'none';
+            document.getElementById('feedbackForm').style.display = 'block';
+        });
+        
+        // Testimonial form submission
+        document.getElementById('testimonialForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('testimonialName').value;
+            const location = document.getElementById('testimonialLocation').value;
+            const text = document.getElementById('testimonialText').value;
+            
+            // In a real app, this would be sent to a server
+            alert(`Thank you, ${name}, for sharing your testimony from ${location}! Your feedback helps us improve our services.`);
+            
+            // Reset form
+            this.reset();
+            
+            // Return to view testimonials
+            document.getElementById('testimonialsView').style.display = 'grid';
+            document.getElementById('addTestimonialForm').style.display = 'none';
+        });
+        
+        // Feedback form submission
+        document.getElementById('feedbackFormInput').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const category = document.getElementById('feedbackCategory').value;
+            const text = document.getElementById('feedbackText').value;
+            const email = document.getElementById('feedbackEmail').value;
+            
+            // In a real app, this would be sent to a server
+            alert(`Thank you for your ${category} feedback! ${email ? 'We may contact you at ' + email + ' if needed.' : ''}`);
+            
+            // Reset form
+            this.reset();
+            
+            // Return to view testimonials
+            document.getElementById('testimonialsView').style.display = 'grid';
+            document.getElementById('feedbackForm').style.display = 'none';
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Highlight active navigation link based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
