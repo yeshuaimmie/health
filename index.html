@@ -6,7 +6,7 @@
     <title>HealthConnect | Northern Uganda Medical Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base Styles */
+        /* Base Styles - Keep existing styles */
         :root {
             --primary: #1a73e8;
             --primary-dark: #0d47a1;
@@ -90,7 +90,16 @@
             background: #2d8c47;
         }
 
-        /* Navigation */
+        .btn-warning {
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+
+        /* Navigation - Keep existing styles */
         header {
             background: white;
             box-shadow: var(--shadow);
@@ -168,7 +177,7 @@
             cursor: pointer;
         }
 
-        /* Hero Slider */
+        /* Hero Slider - Keep existing styles */
         .hero {
             margin-top: 80px;
             background: linear-gradient(rgba(26, 115, 232, 0.9), rgba(13, 71, 161, 0.9)), url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
@@ -287,7 +296,7 @@
             background: white;
         }
 
-        /* Health Assessment Section */
+        /* Health Assessment Section - Modified */
         .assessment {
             background: white;
             padding: 60px 20px;
@@ -413,6 +422,7 @@
 
         .results.active {
             display: block;
+            animation: fadeIn 0.5s ease;
         }
 
         .results h4 {
@@ -420,6 +430,125 @@
             margin-bottom: 10px;
         }
 
+        /* Test Result Page Styles */
+        .test-result-container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .test-result-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .test-result-header h2 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .parasite-strength {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .strength-option {
+            padding: 15px 25px;
+            background: white;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .strength-option:hover {
+            border-color: var(--primary);
+            background: #f0f7ff;
+        }
+
+        .strength-option.selected {
+            border-color: var(--primary);
+            background: #e8f0fe;
+            color: var(--primary);
+        }
+
+        .strength-option.plus {
+            color: var(--warning);
+        }
+
+        .strength-option.double-plus {
+            color: #ff9800;
+        }
+
+        .strength-option.triple-plus {
+            color: var(--danger);
+        }
+
+        .treatment-advice {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            border-left: 5px solid var(--secondary);
+            display: none;
+        }
+
+        .treatment-advice.active {
+            display: block;
+        }
+
+        .treatment-advice h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        .treatment-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .treatment-list li {
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .treatment-list li.urgent {
+            border-left-color: var(--danger);
+            background: #ffebee;
+        }
+
+        .treatment-list li.moderate {
+            border-left-color: var(--warning);
+            background: #fff8e1;
+        }
+
+        .treatment-list li.mild {
+            border-left-color: var(--secondary);
+            background: #e8f5e9;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        /* Other existing styles for Team, Testimonials, Study, Footer sections remain the same */
         /* Team Section */
         .team-grid {
             display: grid;
@@ -694,6 +823,16 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .parasite-strength {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .strength-option {
+                width: 100%;
+                max-width: 200px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -711,6 +850,10 @@
 
             .testimonial-form, .feedback-form {
                 padding: 25px 20px;
+            }
+
+            .test-result-container {
+                padding: 20px;
             }
         }
     </style>
@@ -733,8 +876,7 @@
                     <li><a href="#test">Test</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#study">Study</a></li>
-<li><a href="index1.html">Doctor</a></li>
-
+                    <li><a href="index1.html">Doctor</a></li>
                 </ul>
             </nav>
         </div>
@@ -875,7 +1017,7 @@
     </section>
 
     <!-- Health Assessment Section -->
-    <section class="container">
+    <section class="container" id="test">
         <div class="assessment">
             <h2>Health Assessment Tool</h2>
             <p class="text-center" style="color: var(--gray); margin-bottom: 40px;">Answer a few questions to get personalized health advice</p>
@@ -1067,7 +1209,96 @@
                             <h4>Recommended Test Based on Your Symptoms</h4>
                             <p id="recommendedTest">Based on your symptoms, we recommend: <strong>Malaria Test (Blood Film)</strong></p>
                             <p id="additionalAdvice">Please visit the nearest health facility for proper diagnosis and treatment. Based on your region and month, malaria is currently prevalent in your area.</p>
-                            <button class="btn btn-secondary" id="resetAssessment">Start New Assessment</button>
+                            <div class="step-controls">
+                                <button class="btn" id="takeTestBtn">Enter Test Result <i class="fas fa-vial"></i></button>
+                                <button class="btn btn-secondary" id="resetAssessment">Start New Assessment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Malaria Test Result Entry Section (New) -->
+                <div class="question-box" id="malariaTestSection" style="display: none;">
+                    <div class="question-title">
+                        <i class="fas fa-vial"></i>
+                        <h3>Malaria Test Result Entry</h3>
+                    </div>
+                    <div class="question-content active">
+                        <p>Enter your malaria test result to get personalized treatment advice based on parasite strength.</p>
+                        
+                        <div class="form-group">
+                            <label>Select your malaria test result:</label>
+                            <div class="parasite-strength">
+                                <div class="strength-option plus" data-strength="plus">
+                                    <div style="font-size: 32px; margin-bottom: 5px;">+</div>
+                                    <div>Low Parasite Density</div>
+                                    <small>Mild infection</small>
+                                </div>
+                                <div class="strength-option double-plus" data-strength="double-plus">
+                                    <div style="font-size: 32px; margin-bottom: 5px;">++</div>
+                                    <div>Moderate Parasite Density</div>
+                                    <small>Moderate infection</small>
+                                </div>
+                                <div class="strength-option triple-plus" data-strength="triple-plus">
+                                    <div style="font-size: 32px; margin-bottom: 5px;">+++</div>
+                                    <div>High Parasite Density</div>
+                                    <small>Severe infection</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="patientWeight">Patient Weight (kg) - for dosage calculation</label>
+                            <input type="number" class="form-control" id="patientWeight" min="5" max="150" value="60" placeholder="Enter weight in kilograms">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="patientAge">Patient Age</label>
+                            <select class="form-control" id="patientAge">
+                                <option value="adult">Adult (18+ years)</option>
+                                <option value="child">Child (5-17 years)</option>
+                                <option value="toddler">Toddler (1-4 years)</option>
+                                <option value="infant">Infant (below 1 year)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pregnancyStatus">Pregnancy Status (if applicable)</label>
+                            <select class="form-control" id="pregnancyStatus">
+                                <option value="not_pregnant">Not Pregnant</option>
+                                <option value="first_trimester">First Trimester</option>
+                                <option value="second_trimester">Second Trimester</option>
+                                <option value="third_trimester">Third Trimester</option>
+                            </select>
+                        </div>
+                        
+                        <div class="step-controls">
+                            <button type="button" class="btn" id="backToAssessment"><i class="fas fa-arrow-left"></i> Back to Assessment</button>
+                            <button type="button" class="btn btn-secondary" id="submitTestResult">Get Treatment Advice <i class="fas fa-prescription"></i></button>
+                        </div>
+                        
+                        <div class="treatment-advice" id="treatmentAdvice">
+                            <h3>Recommended Treatment Plan</h3>
+                            <p id="parasiteStrengthText">Based on your test result: <strong>+ (Low Parasite Density)</strong></p>
+                            
+                            <div class="warning-box">
+                                <i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> This is for informational purposes only. Always consult a healthcare professional for proper diagnosis and treatment.
+                            </div>
+                            
+                            <h4>Recommended Medications:</h4>
+                            <ul class="treatment-list" id="treatmentList">
+                                <!-- Treatment options will be populated here -->
+                            </ul>
+                            
+                            <h4>Additional Recommendations:</h4>
+                            <ul id="additionalRecommendations">
+                                <!-- Additional recommendations will be populated here -->
+                            </ul>
+                            
+                            <div class="step-controls">
+                                <button type="button" class="btn" id="newTestResult">Enter Another Result</button>
+                                <button type="button" class="btn btn-secondary" id="backToStart">Start New Assessment</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1345,6 +1576,14 @@
                             <li>Nausea and vomiting</li>
                             <li>Fatigue and weakness</li>
                             <li>In severe cases: confusion, seizures, anemia</li>
+                        </ul>
+                        
+                        <h4>Treatment Based on Parasite Density</h4>
+                        <ul>
+                            <li><strong>+ (Low):</strong> Oral Artemisinin-based Combination Therapy (ACT) like Coartem</li>
+                            <li><strong>++ (Moderate):</strong> Oral ACT with close monitoring, may require IV if symptoms worsen</li>
+                            <li><strong>+++ (High):</strong> Hospitalization with IV Artesunate or Quinine followed by oral ACT</li>
+                            <li><strong>Severe Malaria:</strong> IV Artesunate is first-line treatment in hospitals</li>
                         </ul>
                         
                         <h4>Prevention Strategies</h4>
@@ -1674,7 +1913,288 @@
             document.getElementById('q1Title').scrollIntoView({ behavior: 'smooth' });
         });
         
-        // Test result interpretation
+        // NEW: Take Test Button - Show Malaria Test Section
+        document.getElementById('takeTestBtn').addEventListener('click', function() {
+            // Hide current assessment sections
+            document.getElementById('q1Content').classList.remove('active');
+            document.getElementById('q2Content').classList.remove('active');
+            document.getElementById('q3Content').classList.remove('active');
+            document.getElementById('testResults').classList.remove('active');
+            
+            // Show malaria test section
+            document.getElementById('malariaTestSection').style.display = 'block';
+            
+            // Scroll to malaria test section
+            document.getElementById('malariaTestSection').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // NEW: Back to Assessment from Malaria Test
+        document.getElementById('backToAssessment').addEventListener('click', function() {
+            // Hide malaria test section
+            document.getElementById('malariaTestSection').style.display = 'none';
+            document.getElementById('treatmentAdvice').classList.remove('active');
+            
+            // Show assessment results again
+            document.getElementById('testResults').classList.add('active');
+            
+            // Scroll back to results
+            document.getElementById('testResults').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // NEW: Parasite strength selection
+        let selectedStrength = null;
+        const strengthOptions = document.querySelectorAll('.strength-option');
+        
+        strengthOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options
+                strengthOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Store selected strength
+                selectedStrength = this.getAttribute('data-strength');
+            });
+        });
+        
+        // NEW: Submit Test Result
+        document.getElementById('submitTestResult').addEventListener('click', function() {
+            if (!selectedStrength) {
+                alert('Please select your malaria test result (+, ++, or +++)');
+                return;
+            }
+            
+            const weight = parseInt(document.getElementById('patientWeight').value) || 60;
+            const age = document.getElementById('patientAge').value;
+            const pregnancyStatus = document.getElementById('pregnancyStatus').value;
+            
+            // Define treatment based on parasite strength
+            const treatments = {
+                'plus': {
+                    title: '+ (Low Parasite Density - Mild Infection)',
+                    medications: [
+                        {
+                            name: 'Artemether-Lumefantrine (Coartem)',
+                            dosage: calculateCoartemDosage(weight, age),
+                            duration: '3 days',
+                            urgency: 'mild',
+                            notes: 'Take with fatty food for better absorption'
+                        },
+                        {
+                            name: 'Artesunate-Amodiaquine',
+                            dosage: 'Based on weight: 4 mg/kg Artesunate + 10 mg/kg Amodiaquine daily for 3 days',
+                            duration: '3 days',
+                            urgency: 'mild',
+                            notes: 'Alternative first-line treatment'
+                        },
+                        {
+                            name: 'Dihydroartemisinin-Piperaquine',
+                            dosage: 'Once daily for 3 days',
+                            duration: '3 days',
+                            urgency: 'mild',
+                            notes: 'Another ACT option'
+                        }
+                    ],
+                    recommendations: [
+                        'Complete the full 3-day course even if you feel better',
+                        'Rest and drink plenty of fluids',
+                        'Monitor for worsening symptoms',
+                        'Follow up with healthcare provider if symptoms persist after treatment'
+                    ]
+                },
+                'double-plus': {
+                    title: '++ (Moderate Parasite Density - Moderate Infection)',
+                    medications: [
+                        {
+                            name: 'IV Artesunate (if hospitalized)',
+                            dosage: '2.4 mg/kg at 0, 12, 24, and 48 hours',
+                            duration: 'Until able to tolerate oral medication',
+                            urgency: 'moderate',
+                            notes: 'Followed by full course of oral ACT'
+                        },
+                        {
+                            name: 'Oral Artemether-Lumefantrine (Coartem)',
+                            dosage: calculateCoartemDosage(weight, age),
+                            duration: '3 days',
+                            urgency: 'moderate',
+                            notes: 'If not hospitalized, must be closely monitored'
+                        },
+                        {
+                            name: 'IV Quinine (alternative)',
+                            dosage: '20 mg salt/kg loading dose, then 10 mg/kg every 8 hours',
+                            duration: 'Minimum 24 hours',
+                            urgency: 'moderate',
+                            notes: 'Followed by oral quinine + doxycycline/clindamycin for 7 days'
+                        }
+                    ],
+                    recommendations: [
+                        'Close medical supervision recommended',
+                        'Consider hospitalization if symptoms are severe',
+                        'Monitor for signs of severe malaria',
+                        'Complete full treatment course',
+                        'Bed rest and hydration are crucial'
+                    ]
+                },
+                'triple-plus': {
+                    title: '+++ (High Parasite Density - Severe Infection)',
+                    medications: [
+                        {
+                            name: 'IV Artesunate (First Line)',
+                            dosage: '2.4 mg/kg at 0, 12, 24, and 48 hours',
+                            duration: 'Until parasite density <1% and patient can tolerate oral medication',
+                            urgency: 'urgent',
+                            notes: 'REQUIRES HOSPITALIZATION - Most effective for severe malaria'
+                        },
+                        {
+                            name: 'IV Quinine (Alternative)',
+                            dosage: '20 mg salt/kg loading dose (unless received quinine/mefloquine in past 24h), then 10 mg/kg every 8 hours',
+                            duration: 'At least 24 hours',
+                            urgency: 'urgent',
+                            notes: 'Followed by oral quinine to complete 7-day course'
+                        },
+                        {
+                            name: 'Oral ACT after IV treatment',
+                            dosage: 'Full 3-day course of Artemether-Lumefantrine or other ACT',
+                            duration: '3 days',
+                            urgency: 'urgent',
+                            notes: 'To be started when patient can tolerate oral medication'
+                        }
+                    ],
+                    recommendations: [
+                        'IMMEDIATE HOSPITALIZATION REQUIRED',
+                        'Intensive care may be needed',
+                        'Monitor for complications: cerebral malaria, renal failure, severe anemia',
+                        'Blood transfusion may be necessary if severe anemia',
+                        'Management of convulsions and other complications'
+                    ]
+                }
+            };
+            
+            // Adjust for pregnancy
+            if (pregnancyStatus !== 'not_pregnant') {
+                treatments['plus'].medications = [
+                    {
+                        name: 'Artemether-Lumefantrine (Coartem) - 2nd/3rd Trimester',
+                        dosage: calculateCoartemDosage(weight, age),
+                        duration: '3 days',
+                        urgency: 'mild',
+                        notes: 'Safe in 2nd and 3rd trimester. In 1st trimester, quinine + clindamycin for 7 days is preferred'
+                    }
+                ];
+                
+                if (selectedStrength === 'double-plus' || selectedStrength === 'triple-plus') {
+                    treatments[selectedStrength].recommendations.push('Pregnancy increases risk of severe malaria - EXTRA MONITORING NEEDED');
+                    treatments[selectedStrength].recommendations.push('IV Artesunate is safe in all trimesters');
+                }
+            }
+            
+            // Adjust for children
+            if (age === 'child' || age === 'toddler' || age === 'infant') {
+                treatments[selectedStrength].recommendations.push('Pediatric dosage must be carefully calculated based on weight');
+                treatments[selectedStrength].recommendations.push('Monitor for signs of dehydration in children');
+            }
+            
+            // Display treatment advice
+            const treatment = treatments[selectedStrength];
+            document.getElementById('parasiteStrengthText').innerHTML = `Based on your test result: <strong>${treatment.title}</strong>`;
+            
+            // Clear previous treatments
+            const treatmentList = document.getElementById('treatmentList');
+            treatmentList.innerHTML = '';
+            
+            // Add new treatments
+            treatment.medications.forEach(med => {
+                const li = document.createElement('li');
+                li.className = `treatment-list ${med.urgency}`;
+                li.innerHTML = `
+                    <strong>${med.name}</strong><br>
+                    <small>Dosage: ${med.dosage}</small><br>
+                    <small>Duration: ${med.duration}</small><br>
+                    <small>Notes: ${med.notes}</small>
+                `;
+                treatmentList.appendChild(li);
+            });
+            
+            // Add additional recommendations
+            const recommendationsList = document.getElementById('additionalRecommendations');
+            recommendationsList.innerHTML = '';
+            
+            treatment.recommendations.forEach(rec => {
+                const li = document.createElement('li');
+                li.textContent = rec;
+                recommendationsList.appendChild(li);
+            });
+            
+            // Show treatment advice
+            document.getElementById('treatmentAdvice').classList.add('active');
+            
+            // Scroll to treatment advice
+            document.getElementById('treatmentAdvice').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // NEW: Calculate Coartem dosage based on weight and age
+        function calculateCoartemDosage(weight, age) {
+            if (age === 'infant') {
+                return 'Pediatric dispersible tablets: Consult pediatrician for exact dosage';
+            } else if (age === 'toddler') {
+                if (weight < 15) return '1 tablet per dose (20/120 mg)';
+                if (weight >= 15 && weight < 25) return '2 tablets per dose (20/120 mg)';
+            } else if (age === 'child') {
+                if (weight >= 25 && weight < 35) return '3 tablets per dose (20/120 mg)';
+                if (weight >= 35) return 'Adult regimen based on weight';
+            }
+            
+            // Adult dosing
+            if (weight >= 35 && weight < 65) {
+                return '4 tablets initially, then 4 tablets at 8, 24, 36, 48, and 60 hours (total 24 tablets)';
+            } else if (weight >= 65) {
+                return 'Adult standard dose: 4 tablets twice daily for 3 days (total 24 tablets)';
+            }
+            
+            return 'Consult healthcare provider for exact dosage';
+        }
+        
+        // NEW: Enter another test result
+        document.getElementById('newTestResult').addEventListener('click', function() {
+            // Reset selection
+            strengthOptions.forEach(opt => opt.classList.remove('selected'));
+            selectedStrength = null;
+            
+            // Hide treatment advice
+            document.getElementById('treatmentAdvice').classList.remove('active');
+            
+            // Scroll back to top of test section
+            document.getElementById('malariaTestSection').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // NEW: Back to start
+        document.getElementById('backToStart').addEventListener('click', function() {
+            // Hide malaria test section
+            document.getElementById('malariaTestSection').style.display = 'none';
+            document.getElementById('treatmentAdvice').classList.remove('active');
+            
+            // Reset assessment
+            document.getElementById('symptomsForm').reset();
+            document.getElementById('additionalSymptomsForm').reset();
+            document.getElementById('exposureForm').reset();
+            
+            // Reset UI
+            document.getElementById('q1Content').classList.add('active');
+            document.getElementById('q2Content').classList.remove('active');
+            document.getElementById('q3Content').classList.remove('active');
+            document.getElementById('testResults').classList.remove('active');
+            
+            // Reset highlights
+            document.getElementById('q1Title').style.opacity = '1';
+            document.getElementById('q2Title').style.opacity = '0.7';
+            document.getElementById('q3Title').style.opacity = '0.7';
+            
+            // Scroll to top of assessment
+            document.getElementById('q1Title').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Existing Test Result Interpretation (keep this)
         document.getElementById('testResultForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -1831,4 +2351,3 @@
     </script>
 </body>
 </html>
-
